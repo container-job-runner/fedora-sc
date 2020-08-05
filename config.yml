@@ -1,0 +1,21 @@
+build:
+  args:
+    USER_NAME: "user" # do not change this entry
+    USER_PASSWORD: "password"
+    GRANT_SUDO: "TRUE"
+  args-dynamic:
+    USER_ID: "$(id -u)"
+    GROUP_ID: "$(id -g)"
+mounts:
+  - type: "bind"
+    hostPath: "config/jupyter"
+    containerPath: "/home/user/.jupyter"
+  - type: "bind"
+    hostPath: "config/theia"
+    containerPath: "/home/user/.theia"
+files:
+  containerRoot: "/home/user"
+flags:
+  userns: keep-id
+  docker-chown-file-volume: "host-user"
+  cmd-args: join

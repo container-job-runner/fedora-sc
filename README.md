@@ -37,5 +37,9 @@ cjr stack:pull https://github.com/container-job-runner/fedora-sc.git
 ```
 You can then build the stack by running
 ```console
-cjr stack:build stack-fedora-basic
+cjr stack:build fedora-sc
+```
+To run an interactive shell with this stack run
+```console
+cjr shell --stack=fedora-sc
 ```

@@ -16,16 +16,20 @@ This stack provides basic support for the following packages:
    - Latex
 2. **Libraries**
    - Matplotlib
+   - Ray
    - BLAS, LAPACK
-   - Open MPI
+   - OPENMPI, mpi4py
    - X11
 3. **Dev Environments**
    - Jupyter notebook, Jupyter lab
    - Theia
+   - VS Code (through vnc)
    - vim, git, vim, emacs, tmux
+4. **Additional Software**
+   - tigervnc
 
-The configurations for Jupyter and Theia are respectively stored the directories `config/jupyter` and `config/theia` which are bound to `~/.jupyter` and `~/.theia` in the container.
-The stack comes preconfigured with theia extensions for python, c/c++ and Fortran.
+The configurations for Jupyter, Theia, VSCode, and Tigervnc are respectively stored the directories `config/jupyter`, `config/theia`, `config/vscode`,  and `config/vnc` which are bound to `~/.jupyter`, `~/.theia`, `~/.vscode`, and `~/.vnc` in the container.
+The stack comes preconfigured with Theia extensions for python, c/c++ and Fortran.
 
 When building, the image modifies the default container user so that id and group id match with the host.
 

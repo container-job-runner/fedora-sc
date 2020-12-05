@@ -1,4 +1,4 @@
-FROM cjrun/fedora-sc:0.1.0
+FROM cjrun/fedora-sc:0.1.1
 
 ARG USER_NAME
 ARG USER_ID

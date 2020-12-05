@@ -44,12 +44,11 @@ if [ "$CUR_ID" != "$USER_ID" ] || [  "$CUR_GID" != "$GROUP_ID" ] ; then
   fi
 
   # -- Grant sudo --------------------------------------------------------------
-  if [ "$GRANT_SUDO" = "TRUE" ] ; then
-      if [ -n "$USER_PASSWORD" ] ; then
-          (usermod -aG wheel $USER_NAME)
-      else
-          usermod -aG wheelnopw $USER_NAME
-      fi
+  # passwordless sudo if PASSWORDLESS is specified, or if TRUE is specified and user password is empty
+  if [[ "$GRANT_SUDO" = "PASSWORDLESS" ||  ( "$GRANT_SUDO" = "TRUE" && -z "$USER_PASSWORD" ) ]] ; then    
+    usermod -aG wheelnopw $USER_NAME
+  elif [ "$GRANT_SUDO" = "TRUE" ] ; then
+    usermod -aG wheel $USER_NAME
   fi
 
 fi

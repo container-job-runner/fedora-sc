@@ -6,7 +6,12 @@ build:
   args-dynamic:
     USER_ID: "$(id -u)"
     GROUP_ID: "$(id -g)"
+environment:
+  # allow for additional julia package installs in bound .julia directory (https://discourse.julialang.org/t/how-does-one-set-up-a-centralized-julia-installation/13922/25)
+  JULIA_DEPOT_PATH: "~/.julia:/opt/shared/julia-depot"
+  JULIA_PROJECT: "~/.julia/environments/v1.6/"
 mounts:
+  # binds for software configuration
   - type: "bind"
     hostPath: "config/jupyter"
     containerPath: "/home/user/.jupyter"
@@ -19,9 +24,17 @@ mounts:
   - type: "bind"
     hostPath: "config/vscode"
     containerPath: "/home/user/.vscode"
+    # binds for additional language-specific packages (julia and python)
+  - type: "bind"
+    hostPath: "config/julia"
+    containerPath: "/home/user/.julia"
+  - type: "bind"
+    hostPath: "config/python3.9"
+    containerPath: "/home/user/.local/lib/python3.9"
 files:
   containerRoot: "/home/user"
 flags:
   podman-userns: keep-id
   docker-chown-file-volume: "host-user"
   cmd-args: join
+  security-opt: "seccomp=unconfined" # added for xfce terminal (see https://github.com/mviereck/x11docker/issues/346).
